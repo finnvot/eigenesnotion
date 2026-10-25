@@ -1564,3 +1564,328 @@ body.dark-mode .page-content .check-row input {
     transition-duration: 0.01ms !important;
   }
 }
+
+
+/* =========================================
+   NEXUS — FREE BLOCK CANVAS
+   ========================================= */
+
+.block-editor-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 16px;
+  padding: 11px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.block-toolbar-label {
+  color: var(--text-2);
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 1px;
+}
+
+.block-toolbar-hint {
+  flex: 1;
+  color: var(--text-3);
+  font-size: 10px;
+}
+
+.block-editor-toolbar .primary-btn {
+  min-height: 32px;
+}
+
+.block-canvas {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-height: 430px;
+  padding: 12px 0 35px;
+  border-radius: 10px;
+}
+
+.editor-block {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  gap: 7px;
+  min-width: 0;
+  padding: 3px 5px 3px 0;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  transition: background .15s, border-color .15s;
+}
+
+.editor-block:hover {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+.editor-block.is-dragging {
+  opacity: .35;
+  border: 1px dashed var(--accent);
+}
+
+.editor-block.drop-before {
+  box-shadow: 0 -3px 0 var(--accent);
+}
+
+.editor-block.drop-after {
+  box-shadow: 0 3px 0 var(--accent);
+}
+
+.block-controls {
+  display: flex;
+  align-items: flex-start;
+  flex-shrink: 0;
+  gap: 1px;
+  width: 46px;
+  padding-top: 4px;
+  opacity: .22;
+  transition: opacity .15s;
+}
+
+.editor-block:hover .block-controls,
+.editor-block:focus-within .block-controls {
+  opacity: 1;
+}
+
+.block-control {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 25px;
+  padding: 0;
+  color: var(--text-2);
+  background: transparent;
+  border: 0;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.block-control:hover {
+  color: var(--text);
+  background: var(--surface-2);
+}
+
+.block-control.drag-handle {
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+}
+
+.block-control.drag-handle:active {
+  cursor: grabbing;
+}
+
+.block-control.delete-block:hover {
+  color: var(--danger);
+}
+
+.block-body {
+  flex: 1;
+  min-width: 0;
+  padding: 4px 5px 7px;
+  overflow-wrap: anywhere;
+}
+
+.block-text {
+  min-height: 29px;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.85;
+  outline: none;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.block-text:empty::before {
+  content: attr(data-placeholder);
+  color: var(--text-3);
+  pointer-events: none;
+}
+
+.block-text:focus {
+  outline: none;
+}
+
+.block-text h1,
+.block-text h2,
+.block-text h3 {
+  margin: 0;
+  line-height: 1.35;
+}
+
+.block-text h1 {
+  font-family: Georgia, serif;
+  font-size: 31px;
+  font-weight: 400;
+  letter-spacing: -.8px;
+}
+
+.block-text h2 {
+  font-size: 22px;
+  font-weight: 650;
+  letter-spacing: -.4px;
+}
+
+.block-text p {
+  margin: 0;
+}
+
+.block-text blockquote {
+  margin: 0;
+  padding-left: 14px;
+  color: var(--text-2);
+  border-left: 3px solid #9bad94;
+}
+
+.block-text ul,
+.block-text ol {
+  margin: 0;
+  padding-left: 24px;
+}
+
+.block-text hr {
+  margin: 10px 0;
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+
+.block-text .check-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  line-height: 1.7;
+}
+
+.block-text .check-row input {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  margin-top: 5px;
+  accent-color: var(--accent);
+}
+
+.block-text .check-row input:checked + span {
+  color: var(--text-3);
+  text-decoration: line-through;
+}
+
+.block-text a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.block-text img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.block-menu {
+  position: fixed;
+  z-index: 150;
+  width: min(300px, calc(100vw - 28px));
+  max-height: min(430px, 70vh);
+  overflow-y: auto;
+  padding: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+.block-menu-heading {
+  padding: 9px 10px 12px;
+  color: var(--text-3);
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 1px;
+}
+
+.block-menu button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 9px;
+  text-align: left;
+  color: var(--text);
+  background: transparent;
+  border: 0;
+  border-radius: 7px;
+}
+
+.block-menu button:hover {
+  background: var(--surface-2);
+}
+
+.block-menu button > span:first-child {
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  flex-shrink: 0;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  font-size: 14px;
+}
+
+.block-menu button > span:last-child {
+  display: grid;
+  gap: 4px;
+}
+
+.block-menu strong {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.block-menu small {
+  color: var(--text-2);
+  font-size: 10px;
+}
+
+.block-canvas:empty::after {
+  content: "Klicke auf „+ Block hinzufügen“, um deine Seite aufzubauen.";
+  padding: 18px 12px;
+  color: var(--text-3);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+@media (max-width: 600px) {
+  .block-editor-toolbar {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .block-toolbar-hint {
+    order: 3;
+    flex-basis: 100%;
+  }
+
+  .block-controls {
+    width: 41px;
+    opacity: .8;
+  }
+
+  .block-control {
+    width: 20px;
+  }
+
+  .editor-block {
+    gap: 3px;
+  }
+
+  .block-body {
+    padding-left: 2px;
+  }
+}
