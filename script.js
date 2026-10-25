@@ -1514,35 +1514,6 @@ document.addEventListener("keydown", event => {
   }
 });
 
-/* -----------------------------------------
-   MOBILE NAVIGATION
-   ----------------------------------------- */
-
-$("#menuButton").addEventListener("click", openSidebar);
-$("#closeSidebar").addEventListener("click", closeSidebar);
-
-elements.sidebarOverlay.addEventListener("click", closeSidebar);
-
-/* -----------------------------------------
-   START APPLICATION
-   ----------------------------------------- */
-
-function initializeApp() {
-  loadState();
-  initializeTheme();
-
-  renderAll();
-
-  if (state.activePageId && getActivePage()) {
-    openPage(state.activePageId);
-  } else {
-    setView("dashboard");
-  }
-}
-
-initializeApp();
-
-
 /* =========================================
    NEXUS 2.0 — BLOCK EDITOR + BREADCRUMBS
    Diesen Abschnitt ans Ende von script.js setzen.
@@ -2183,3 +2154,32 @@ if (state.activePageId && getActivePage()) {
 } else {
   goHome();
 }
+
+
+/* -----------------------------------------
+   MOBILE NAVIGATION
+   ----------------------------------------- */
+
+$("#menuButton").addEventListener("click", openSidebar);
+$("#closeSidebar").addEventListener("click", closeSidebar);
+
+elements.sidebarOverlay.addEventListener("click", closeSidebar);
+
+/* -----------------------------------------
+   START APPLICATION
+   ----------------------------------------- */
+
+function initializeApp() {
+  loadState();
+  initializeTheme();
+
+  renderAll();
+
+  if (state.activePageId && getActivePage()) {
+    openPage(state.activePageId);
+  } else {
+    setView("dashboard");
+  }
+}
+
+initializeApp();
