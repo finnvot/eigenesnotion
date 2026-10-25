@@ -1,0 +1,320 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f7f5">
+  <title>Nexus – Dein Workspace</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app">
+
+    <!-- Seitenleiste -->
+    <aside class="sidebar" id="sidebar">
+      <div class="workspace-brand">
+        <div class="brand-icon">N</div>
+        <div class="brand-text">
+          <strong>Nexus</strong>
+          <span>Personal Workspace</span>
+        </div>
+        <button class="icon-btn sidebar-close" id="closeSidebar"
+          aria-label="Menü schließen">×</button>
+      </div>
+
+      <div class="sidebar-actions">
+        <button class="nav-item" id="searchButton">
+          <span class="nav-icon">⌕</span>
+          <span>Suchen</span>
+          <kbd>Ctrl K</kbd>
+        </button>
+        <button class="nav-item" id="homeButton">
+          <span class="nav-icon">⌂</span>
+          <span>Startseite</span>
+        </button>
+        <button class="nav-item" id="allPagesButton">
+          <span class="nav-icon">▤</span>
+          <span>Alle Seiten</span>
+        </button>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="section-heading">
+          <span>DEIN WORKSPACE</span>
+          <button class="tiny-btn" id="newPageButton"
+            title="Neue Seite">+</button>
+        </div>
+        <div id="pageTree" class="page-tree"></div>
+      </div>
+
+      <div class="sidebar-section favorites-section">
+        <div class="section-heading">
+          <span>FAVORITEN</span>
+        </div>
+        <div id="favoriteList" class="page-tree"></div>
+      </div>
+
+      <div class="sidebar-bottom">
+        <div class="storage-indicator">
+          <span class="status-dot"></span>
+          <div>
+            <strong>Lokaler Workspace</strong>
+            <span>Automatisch gespeichert</span>
+          </div>
+        </div>
+        <button class="nav-item" id="themeButton">
+          <span class="nav-icon" id="themeIcon">◐</span>
+          <span id="themeLabel">Design wechseln</span>
+        </button>
+        <div class="sidebar-footer">NEXUS WORKSPACE · VERSION 1.0</div>
+      </div>
+    </aside>
+
+    <!-- Hauptbereich -->
+    <main class="main-area">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="icon-btn mobile-menu" id="menuButton"
+            aria-label="Menü öffnen">☰</button>
+          <div class="breadcrumbs" id="breadcrumbs">
+            <span>Nexus</span>
+            <span class="breadcrumb-separator">/</span>
+            <span>Startseite</span>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <span class="save-status" id="saveStatus">Gespeichert</span>
+          <button class="icon-btn" id="favoriteButton"
+            title="Zu Favoriten hinzufügen" aria-label="Favorit">☆</button>
+          <button class="share-btn" id="exportButton">↓ Exportieren</button>
+          <button class="primary-btn" id="topNewPageButton">+ Neu</button>
+        </div>
+      </header>
+
+      <section class="content-area">
+
+        <!-- Dashboard -->
+        <div id="dashboard" class="dashboard">
+          <div class="welcome-block">
+            <div class="eyebrow">
+              <span class="eyebrow-line"></span>
+              DEIN DIGITALER ARBEITSPLATZ
+            </div>
+            <h1>Raum für deine<br><span>besten Ideen.</span></h1>
+            <p class="welcome-description">
+              Gedanken festhalten, Projekte organisieren und
+              aus Ideen etwas machen.
+            </p>
+            <button class="primary-btn hero-button" id="heroNewPage">
+              <span>＋</span> Neue Seite erstellen
+            </button>
+          </div>
+
+          <div class="dashboard-stats">
+            <div class="stat-card">
+              <div class="stat-top">
+                <span>GESAMTE SEITEN</span>
+                <span class="stat-icon">▤</span>
+              </div>
+              <strong id="pageCount">0</strong>
+              <span class="stat-caption">Deine Wissenssammlung</span>
+            </div>
+            <div class="stat-card">
+              <div class="stat-top">
+                <span>FAVORITEN</span>
+                <span class="stat-icon">☆</span>
+              </div>
+              <strong id="favoriteCount">0</strong>
+              <span class="stat-caption">Schnell erreichbar</span>
+            </div>
+            <div class="stat-card">
+              <div class="stat-top">
+                <span>LETZTE AKTIVITÄT</span>
+                <span class="stat-icon">↗</span>
+              </div>
+              <strong class="activity-value" id="lastActivity">Heute</strong>
+              <span class="stat-caption">Dein Workspace</span>
+            </div>
+          </div>
+
+          <div class="dashboard-section">
+            <div class="section-title-row">
+              <div>
+                <h2>Zuletzt geöffnet</h2>
+                <p>Mach dort weiter, wo du aufgehört hast.</p>
+              </div>
+              <button class="text-btn" id="viewAllButton">
+                Alle Seiten <span>→</span>
+              </button>
+            </div>
+            <div class="recent-grid" id="recentPages"></div>
+          </div>
+
+          <div class="dashboard-section quick-section">
+            <div class="section-title-row">
+              <div>
+                <h2>Schnell starten</h2>
+                <p>Was möchtest du heute festhalten?</p>
+              </div>
+            </div>
+            <div class="quick-grid">
+              <button class="quick-card" data-template="note">
+                <span class="quick-icon note-icon">✎</span>
+                <strong>Schnelle Notiz</strong>
+                <span>Gedanken sofort festhalten</span>
+                <span class="quick-arrow">↗</span>
+              </button>
+              <button class="quick-card" data-template="project">
+                <span class="quick-icon project-icon">◫</span>
+                <strong>Neues Projekt</strong>
+                <span>Plane dein nächstes Vorhaben</span>
+                <span class="quick-arrow">↗</span>
+              </button>
+              <button class="quick-card" data-template="tasks">
+                <span class="quick-icon tasks-icon">☑</span>
+                <strong>Aufgabenliste</strong>
+                <span>Bring Struktur in deinen Tag</span>
+                <span class="quick-arrow">↗</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Seitenübersicht -->
+        <div id="allPagesView" class="all-pages-view hidden">
+          <div class="eyebrow">DEINE SAMMLUNG</div>
+          <h1 class="view-heading">Alle Seiten</h1>
+          <p class="view-description">
+            Deine Notizen und Projekte an einem Ort.
+          </p>
+          <div class="all-pages-grid" id="allPagesGrid"></div>
+        </div>
+
+        <!-- Editor -->
+        
+<article id="editorView" class="editor-view hidden">
+  <div class="editor-meta">
+    <span id="editorIcon">📄</span>
+    <span id="editorDate">Zuletzt bearbeitet</span>
+    <span class="meta-dot">·</span>
+    <span id="wordCount">0 Wörter</span>
+  </div>
+
+  <input id="pageTitle" class="page-title-input"
+    type="text" placeholder="Unbenannte Seite"
+    maxlength="180" autocomplete="off">
+
+  <div class="editor-subtitle">
+    <span>DEINE FREIE ARBEITSFLÄCHE</span>
+    <button class="text-btn" id="addSubpageButton">
+      + Unterseite
+    </button>
+  </div>
+
+  <div class="block-editor-toolbar">
+    <span class="block-toolbar-label">BLÖCKE</span>
+    <span class="block-toolbar-hint">
+      Ziehen zum Verschieben · / für Befehle
+    </span>
+    <button class="primary-btn" id="addBlockButton">
+      + Block hinzufügen
+    </button>
+  </div>
+
+  <div id="pageContent" class="block-canvas"
+    aria-label="Freie Arbeitsfläche"></div>
+
+  <div id="blockMenu" class="block-menu hidden">
+    <div class="block-menu-heading">BLOCK EINFÜGEN</div>
+    <button type="button" data-new-block="text">
+      <span>¶</span><span><strong>Text</strong><small>Einfacher Absatz</small></span>
+    </button>
+    <button type="button" data-new-block="h1">
+      <span>H1</span><span><strong>Überschrift 1</strong><small>Großer Titel</small></span>
+    </button>
+    <button type="button" data-new-block="h2">
+      <span>H2</span><span><strong>Überschrift 2</strong><small>Abschnitt</small></span>
+    </button>
+    <button type="button" data-new-block="todo">
+      <span>☑</span><span><strong>Checkliste</strong><small>Abhakbare Aufgabe</small></span>
+    </button>
+    <button type="button" data-new-block="bullet">
+      <span>•</span><span><strong>Aufzählung</strong><small>Listenpunkt</small></span>
+    </button>
+    <button type="button" data-new-block="quote">
+      <span>❞</span><span><strong>Zitat</strong><small>Hervorgehobener Text</small></span>
+    </button>
+    <button type="button" data-new-block="divider">
+      <span>—</span><span><strong>Trennlinie</strong><small>Abschnitte teilen</small></span>
+    </button>
+  </div>
+
+  <div class="editor-bottom">
+    <div class="editor-bottom-left">
+      <span class="status-dot"></span>
+      <span>Blöcke werden automatisch gespeichert</span>
+    </div>
+    <button class="danger-text-btn" id="deletePageButton">
+      Seite löschen
+    </button>
+  </div>
+
+  <div class="subpages-section">
+    <h3>Unterseiten</h3>
+    <div id="subpageList" class="subpage-list"></div>
+  </div>
+</article>
+
+
+        <!-- Suche -->
+        <div id="searchView" class="search-view hidden">
+          <div class="eyebrow">WISSEN SCHNELL FINDEN</div>
+          <h1 class="view-heading">Suche</h1>
+          <input id="searchInput" class="search-input"
+            type="search" placeholder="Seiten und Inhalte durchsuchen …"
+            autocomplete="off">
+          <div id="searchResults" class="search-results"></div>
+        </div>
+
+      </section>
+    </main>
+  </div>
+
+  <div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+  <!-- Dialog zum Erstellen von Seiten -->
+  <div class="modal-backdrop hidden" id="pageModal">
+    <form class="modal" id="pageForm">
+      <div class="modal-header">
+        <div>
+          <span class="eyebrow">DEIN WORKSPACE</span>
+          <h2>Neue Seite</h2>
+        </div>
+        <button type="button" class="icon-btn" id="closeModal"
+          aria-label="Schließen">×</button>
+      </div>
+      <label for="newPageTitle">Seitentitel</label>
+      <input id="newPageTitle" class="modal-input"
+        type="text" placeholder="z. B. Meine Ideen" maxlength="180"
+        required>
+      <label for="newPageType">Vorlage</label>
+      <select id="newPageType" class="modal-input">
+        <option value="blank">Leere Seite</option>
+        <option value="note">Schnelle Notiz</option>
+        <option value="project">Projektplanung</option>
+        <option value="tasks">Aufgabenliste</option>
+      </select>
+      <div class="modal-actions">
+        <button type="button" class="secondary-btn" id="cancelModal">
+          Abbrechen
+        </button>
+        <button type="submit" class="primary-btn">Seite erstellen →</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
